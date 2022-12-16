@@ -17,17 +17,25 @@ export const styles = StyleSheet.create({
     paddingTop: 50,
     textAlign: 'center',
   },
+  textIcon: {
+    color: 'white'
+  },
   icone: {
-    borderRadius: 20,
-    paddingLeft: 3,
+    borderRadius: 5,
     backgroundColor: '#1B98E0',
-    width: 40,
-    height: 40,
+    width: 60,
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   float: {
     marginTop: 30,
     width: '100%',
-    alignItems: 'flex-end'
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row'
+    
+    
     
   }
 });

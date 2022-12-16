@@ -1,15 +1,14 @@
 import { useCallback, useState } from 'react';
-import { Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList,TouchableOpacity } from 'react-native';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { Card } from '../../components/Card';
-import { Button } from '../../components/Button';
 
 import { styles } from './styles';
 
-export default function Lista() {
+export default function Lista({navigation}) {
   const [data, setData] = useState([]);
 
   const { getItem, setItem } = useAsyncStorage("@savepass:passwords");
@@ -35,17 +34,23 @@ export default function Lista() {
     setData(data);
   }
 
-  //Navegar para a Tela de Cadastro
-  async function goPaginaCadastro() {
+  //Navegar entre telas
+  async function goPagina(tela) {
+    navigation.navigate(tela)
   }
 
 
   return (
     <View style={styles.container}>
       <View style={styles.float}>
-        <View style={styles.icone}>
-          <Ionicons onPress={goPaginaCadastro} name="person-add-outline" size={33} color="white" />
-        </View>
+        <TouchableOpacity style={styles.icone}>
+          <Ionicons onPress={() => goPagina('Home')} name="arrow-back-circle-outline" size={33} color="white" />
+          <Text style={styles.textIcon}>Voltar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.icone}>
+          <Ionicons onPress={() => goPagina('Form')} name="person-add-outline" size={33} color="white" />
+          <Text style={styles.textIcon}>Add</Text>
+        </TouchableOpacity>
       </View>
       <Text style={styles.title}>Listagem de Usuários</Text>
 

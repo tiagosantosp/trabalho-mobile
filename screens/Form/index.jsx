@@ -9,7 +9,7 @@ import { styles } from './styles';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 
-export default function Form() {
+export default function Form({navigation}) {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,7 +17,21 @@ export default function Form() {
 
   const { getItem, setItem } = useAsyncStorage("@savepass:passwords");
 
+  //Validar Campos
+  function verificaCampos(){
+    if (name == '' || email == '' || password == '') {
+      Toast.show({
+        type: "error",
+        text1: "Preencha todos os campos."
+      })
+      return false
+    }
+    return true
+  }
+
   async function salvarUsuario() {
+    //Validar se os campos estão Preenchidos
+    if (!verificaCampos()) return
 
     try {
       //Gerar Id unico
@@ -45,15 +59,23 @@ export default function Form() {
         type: "success",
         text1: "Cadastrado com sucesso!"
       })
+
+      //Navegar para tela de Listagem
+      navigation.navigate('Lista')
+      
     } catch (error) {
       console.log(error);
-
       Toast.show({
         type: "error",
         text1: "Não foi possível cadastrar."
       })
     }
   }
+
+  async function cancelar() {
+    navigation.navigate('Lista')
+  }
+
 
   return (
       <View style={styles.content}>
@@ -87,7 +109,7 @@ export default function Form() {
             <Button
               title="Cancelar"
               cancelar
-              onPress={salvarUsuario}
+              onPress={cancelar}
             />
           </View>
         </ScrollView>
