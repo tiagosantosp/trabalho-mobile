@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     fontSize: 13,
   },
   password: {
-    color: '#1967FB',
+    color: '#1B98E0',
     fontSize: 15,
     fontWeight: 'bold',
   },

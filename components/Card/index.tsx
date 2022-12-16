@@ -4,18 +4,9 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { styles } from './styles';
 
-export type CardProps = {
-  id: string;
-  name: string;
-  user: string;
-  password: string;
-}
-type Props = {
-  data: CardProps;
-  onPress: () => void;
-}
 
-export function Card({ data, onPress }: Props) {
+
+export function Card({ data, onPress }) {
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
 
   function togglePasswordIsVisible() {
@@ -46,7 +37,7 @@ export function Card({ data, onPress }: Props) {
               </Text>
               :
               <Text style={styles.email}>
-                {data.user}
+                {data.email}
               </Text>
           }
         </View>
@@ -59,7 +50,7 @@ export function Card({ data, onPress }: Props) {
         <MaterialIcons
           name="delete"
           size={22}
-          color="#888D97"
+          color="#DE6969"
         />
       </TouchableOpacity>
     </View>

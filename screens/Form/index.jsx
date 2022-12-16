@@ -12,7 +12,7 @@ import { Button } from '../../components/Button';
 export default function Form() {
 
   const [name, setName] = useState("");
-  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { getItem, setItem } = useAsyncStorage("@savepass:passwords");
@@ -20,20 +20,27 @@ export default function Form() {
   async function salvarUsuario() {
 
     try {
+      //Gerar Id unico
       const id = uuid.v4();
 
+      //Criar Objeto 
       const newData = {
         id,
         name,
-        user,
+        email,
         password
       }
 
+      //Obter os dados do AsyncStorage
       const response = await getItem();
       const previousData = response ? JSON.parse(response) : [];
 
+      // Merge dados do AsyncStarage com o novo registro
       const data = [...previousData, newData];
+      console.log(data);
+      //Salvar lista atualizada
       await setItem(JSON.stringify(data));
+
       Toast.show({
         type: "success",
         text1: "Cadastrado com sucesso!"
@@ -62,7 +69,7 @@ export default function Form() {
             <Input
               label="E-mail"
               autoCapitalize="none"
-              onChangeText={setUser}
+              onChangeText={setEmail}
             />
             <Input
               label="Senha"
@@ -73,7 +80,13 @@ export default function Form() {
 
           <View style={styles.footer}>
             <Button
-              title="Salvar"
+              confirmar
+              title="Cadastrar"
+              onPress={salvarUsuario}
+            />
+            <Button
+              title="Cancelar"
+              cancelar
               onPress={salvarUsuario}
             />
           </View>

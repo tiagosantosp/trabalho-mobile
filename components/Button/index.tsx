@@ -6,10 +6,16 @@ type Props = TouchableOpacityProps & {
   title: string;
 }
 
-export function Button({ title, ...rest }: Props) {
+export function Button({ title, confirmar, cancelar, add ,...rest }) {
+  const styleField = [styles.container]
+
+  if (cancelar) styleField.push(styles.cancel)
+  if (confirmar) styleField.push(styles.confirm)
+  if (add) styleField.push(styles.float)
+
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={styleField}
       {...rest}
     >
       <Text style={styles.title}>
