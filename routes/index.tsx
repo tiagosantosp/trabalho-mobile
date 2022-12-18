@@ -12,7 +12,7 @@ export default function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator 
-        initialRouteName='Lista' 
+        initialRouteName='Home' 
         screenOptions={{
           headerShown: false
         }}>

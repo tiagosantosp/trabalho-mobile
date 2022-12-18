@@ -11,12 +11,13 @@ import { styles } from './styles';
 export default function Lista({navigation}) {
   const [data, setData] = useState([]);
 
-  const { getItem, setItem } = useAsyncStorage("@savepass:passwords");
+  const { getItem, setItem, removeItem } = useAsyncStorage("@savepass:passwords");
 
   //Obter dados do AsyncStorage
   async function obterDados() {
     const response = await getItem();
     const data = response ? JSON.parse(response) : [];
+    console.log(data)
     setData(data);
   }
 
@@ -38,6 +39,7 @@ export default function Lista({navigation}) {
   async function goPagina(tela) {
     navigation.navigate(tela)
   }
+
 
 
   return (
